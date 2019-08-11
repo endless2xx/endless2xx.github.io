@@ -9,7 +9,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>Go語言并发入门1 - Endlexx</title>
+<title>Go語言并发入门1-goroutine - Endlexx</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -29,8 +29,8 @@
 
     <meta name="keywords" content="Golang,Goroutine">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go語言并发入门1">
-<meta property="og:url" content="https://endless2xx.github.io/2019/08/11/Go語言并发入门1/index.html">
+<meta property="og:title" content="Go語言并发入门1-goroutine">
+<meta property="og:url" content="https://endless2xx.github.io/2019/08/11/Go語言并发入门1--goroutine/index.html">
 <meta property="og:site_name" content="Endlexx">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.pexels.com/photos/326634/pexels-photo-326634.jpeg?cs=srgb&dl=architecture-asphalt-buildings-326634.jpg&fm=jpg">
@@ -38,9 +38,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811163708.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811194443.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811205853.png">
-<meta property="og:updated_time" content="2019-08-11T13:58:30.079Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811223051.png">
+<meta property="og:updated_time" content="2019-08-11T14:44:55.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go語言并发入门1">
+<meta name="twitter:title" content="Go語言并发入门1-goroutine">
 <meta name="twitter:image" content="https://images.pexels.com/photos/326634/pexels-photo-326634.jpeg?cs=srgb&dl=architecture-asphalt-buildings-326634.jpg&fm=jpg">
 
 
@@ -113,13 +114,13 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="搜索" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
             
             <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
-                <a class="navbar-item" title="目录">
+                <a class="navbar-item" title="Table of Contents">
                     <i class="fa fa-list"></i>
                 </a>
                 <div class="navbar-dropdown is-right">
@@ -161,7 +162,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Go語言并发入门1
+            Go語言并发入门1-goroutine
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -178,7 +179,7 @@
         <span class="column is-narrow">
             
             
-            7 分钟 读完 (约 1050 字)
+            8 分钟 read (About 1200 words)
         </span>
         
     </div>
@@ -204,6 +205,10 @@
 <p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811205853.png" alt></p>
 <p><strong>疑问？</strong>此处为什么是先打印 <code>大写字母</code> 而不是先打印 <code>小写字母</code> ？？？</p>
 <p><strong><span style="color:red;">TODO-1: <span></span></span></strong> 暂时存疑，后面研究一下单独写一篇博客来记录</p>
+<p>此处，书中有一句解释：</p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811223051.png" alt></p>
+<p>这里说的第一个 goroutine 完成时间太短的意识是 <code>大写字母</code> 和 <code>小写字母</code> 没有交叉打印的原因。下面的列子则演示了两个 goroutine 相互交叉打印的情况：</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> (</span><br><span class="line">	<span class="hljs-string">"fmt"</span></span><br><span class="line">	<span class="hljs-string">"runtime"</span></span><br><span class="line">	<span class="hljs-string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> wg sync.WaitGroup</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	runtime.GOMAXPROCS(<span class="hljs-number">1</span>)</span><br><span class="line">	wg.Add(<span class="hljs-number">2</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="hljs-string">"Create Goroutines"</span>)</span><br><span class="line">	<span class="hljs-keyword">go</span> printPrime(<span class="hljs-string">"A"</span>)</span><br><span class="line">	<span class="hljs-keyword">go</span> printPrime(<span class="hljs-string">"B"</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="hljs-string">"Waiting To Finish"</span>)</span><br><span class="line">	wg.Wait()</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="hljs-string">"Terminating Program"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">printPrime</span><span class="hljs-params">(prefix <span class="hljs-keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="hljs-keyword">defer</span> wg.Done()</span><br><span class="line">next:</span><br><span class="line">	<span class="hljs-keyword">for</span> outer := <span class="hljs-number">2</span>; outer &lt; <span class="hljs-number">5000</span>; outer++ &#123;</span><br><span class="line">		<span class="hljs-keyword">for</span> inner := <span class="hljs-number">2</span>; inner &lt; outer; inner++ &#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> outer%inner == <span class="hljs-number">0</span> &#123;</span><br><span class="line">				<span class="hljs-keyword">continue</span> next</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Printf(<span class="hljs-string">"%s: %d \n"</span>, prefix, outer)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"Completed"</span>, prefix)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     
     </div>
@@ -234,12 +239,12 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">评论</h3>
+    <h3 class="title is-4">Comments</h3>
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://endless2xx.github.io/2019/08/11/Go語言并发入门1/';
-        this.page.identifier = '2019/08/11/Go語言并发入门1/';
+        this.page.url = 'https://endless2xx.github.io/2019/08/11/Go語言并发入门1--goroutine/';
+        this.page.identifier = '2019/08/11/Go語言并发入门1--goroutine/';
         
         this.language = 'zh';
         
@@ -436,7 +441,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -448,11 +453,11 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };
