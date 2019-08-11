@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+	
+<script type="text/javascript">
+    var host = "https://endless2xx.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+    <meta charset="utf-8">
+<title>Go語言并发入门1 - Endlexx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+
+
+
+<meta name="description" content="学海无涯">
+
+
+
+
+
+    <meta name="keywords" content="Golang,Goroutine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go語言并发入门1">
+<meta property="og:url" content="https://endless2xx.github.io/2019/08/11/Go語言并发入门1/index.html">
+<meta property="og:site_name" content="Endlexx">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/326634/pexels-photo-326634.jpeg?cs=srgb&dl=architecture-asphalt-buildings-326634.jpg&fm=jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811163640.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811163708.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811194443.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190811205853.png">
+<meta property="og:updated_time" content="2019-08-11T13:58:30.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go語言并发入门1">
+<meta name="twitter:image" content="https://images.pexels.com/photos/326634/pexels-photo-326634.jpeg?cs=srgb&dl=architecture-asphalt-buildings-326634.jpg&fm=jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">归档</a>
+            
+            <a class="navbar-item " href="/categories">分类</a>
+            
+            <a class="navbar-item " href="/tags">标签</a>
+            
+            <a class="navbar-item " href="/music">画廊</a>
+            
+            <a class="navbar-item " href="/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#并发与并行">1&nbsp;&nbsp;<b>并发与并行</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#进程与线程">1.1&nbsp;&nbsp;进程与线程</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#并发和并行的区别">1.2&nbsp;&nbsp;并发和并行的区别</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#goroutine">1.3&nbsp;&nbsp;goroutine</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/endless2xx">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Go語言并发入门1
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-08-11T07:23:41.000Z" itemprop="datePublished">8月 11 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Golang/">Golang</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 分钟 读完 (约 1050 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="https://images.pexels.com/photos/326634/pexels-photo-326634.jpeg?cs=srgb&dl=architecture-asphalt-buildings-326634.jpg&fm=jpg" alt="开局一张图"></p>
+<a id="more"></a>
+
+<h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p>操作系统是在 <code>物理处理器</code> 上调度线程来执行，而 Go 语言在运行时，会在 <code>逻辑处理器</code> 上调度 <code>goroutine(协程)</code> 来运行，每个逻辑处理器都分别绑定到一个操作系统线程。从 <code>Go 1.5</code> 版本开始，Go 语言默认会为每个可用的物理处理器分配一个逻辑处理器，这些逻辑处理器会用于执行所有被创建的 <code>goroutine</code>。而在 1.5 版本之前，默认给整个应用程序只分配一个逻辑处理器。</p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811163640.png" alt></p>
+<p>如下图所示，一个逻辑处理器（如P0）被绑定到了操作系统线程（M2）上，该逻辑处理器对应一个本地的 <code>运行队列</code> 每一次创建新的 goroutine 都会本分配到运行队列上，二逻辑处理器则是从该队列上调度 goroutine 来执行。</p>
+<p>如果运行的 goroutine 需要执行一个阻塞的操作（比如打开文件）时，<code>线程</code> 和 <code>goroutine</code> 会从 <code>逻辑处理器</code> 上分离开（如下图右侧图所示），该线程（M2）会继续阻塞，而此时的调度器会为逻辑处理器创建一个新的 <code>线程</code> 并绑定在该逻辑处理器上，之后，该逻辑处理器可以继续从运行队列中选择 goroutine 来执行。一旦被阻塞的操作执行完成并返回，对应的 goroutine 会被放回到本地运行队列，而之前的线程会被保存好，以便可以继续使用。</p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811163708.png" alt></p>
+<p>调度器对可以创建的逻辑处理器的数量没有限制，但是语言运行时默认限制每个程序最多创建 10 000 个线程（每个逻辑处理器都会绑定一个系统线程，所以创建一个逻辑处理器就需要创建一个系统线程）。该限制可以可以通过调用 <code>runtime/debuger</code> 包中的 <code>SetMaxThreads</code> 方法来设置。</p>
+<h3 id="并发和并行的区别"><a href="#并发和并行的区别" class="headerlink" title="并发和并行的区别"></a>并发和并行的区别</h3><p><strong>并行：</strong> 不同的代码同时在 <code>不同的处理器</code> 上执行，需要更多的硬件资源，比如多核处理器</p>
+<p><strong>并发：</strong> 不同的代码在同 <code>一个处理器</code> 上执行，需要较少的硬件资源，单核处理器就可以处理</p>
+<p>Go 语言的设计理念是『使用较少的资源做更多的事』。</p>
+<p>当有多个逻辑处理器可以使用时，Go 语言的调度器会将 goroutine 平均分配到每个逻辑处理器，这样 goroutine 就会在不同的线程上执行。</p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811194443.png" alt></p>
+<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3><p>下面通过一个例子深入理解调度器的行为</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> (</span><br><span class="line">	<span class="hljs-string">"fmt"</span></span><br><span class="line">	<span class="hljs-string">"runtime"</span></span><br><span class="line">	<span class="hljs-string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 演示如何创建 goroutine</span></span><br><span class="line"><span class="hljs-comment">// 以及调度器的行为</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	<span class="hljs-comment">// 分配一个逻辑处理器给调度器</span></span><br><span class="line">	<span class="hljs-comment">// 函数 GOMAXPROCS 允许程序更改调度器可以使用的逻辑处理器的数量</span></span><br><span class="line">	runtime.GOMAXPROCS(<span class="hljs-number">1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">// wg 用来等待程序完成</span></span><br><span class="line">	<span class="hljs-comment">// 计数加2，表示等待两个 goroutine</span></span><br><span class="line">	<span class="hljs-keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="hljs-number">2</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="hljs-string">"Start Goroutines"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">// 声明一个匿名函数，并创建一个 goroutine</span></span><br><span class="line">	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">		<span class="hljs-comment">// 在函数退出时调用 Done 来通知 main 函数工作已经完成</span></span><br><span class="line">		<span class="hljs-keyword">defer</span> wg.Done()</span><br><span class="line">		<span class="hljs-comment">// 打印字母表 3 次</span></span><br><span class="line">		<span class="hljs-keyword">for</span> count := <span class="hljs-number">0</span>; count &lt; <span class="hljs-number">3</span>; count++ &#123;</span><br><span class="line">			<span class="hljs-keyword">for</span> char := <span class="hljs-string">'a'</span>; char &lt; <span class="hljs-string">'a'</span>+<span class="hljs-number">26</span>; char++ &#123;</span><br><span class="line">				fmt.Printf(<span class="hljs-string">"%c "</span>, char)</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="hljs-string">"\n"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="hljs-string">"\n"</span>)</span><br><span class="line">	<span class="hljs-comment">// 声明一个匿名函数，并创建第二个 goroutine</span></span><br><span class="line">	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">		<span class="hljs-comment">// 同上</span></span><br><span class="line">		<span class="hljs-keyword">defer</span> wg.Done()</span><br><span class="line"></span><br><span class="line">		<span class="hljs-keyword">for</span> count := <span class="hljs-number">0</span>; count &lt; <span class="hljs-number">3</span>; count++ &#123;</span><br><span class="line">			<span class="hljs-keyword">for</span> char := <span class="hljs-string">'A'</span>; char &lt; <span class="hljs-string">'A'</span>+<span class="hljs-number">26</span>; char++ &#123;</span><br><span class="line">				fmt.Printf(<span class="hljs-string">"%c "</span>, char)</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="hljs-string">"\n"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">// 等待 goroutine 结束</span></span><br><span class="line">	fmt.Println(<span class="hljs-string">"Waiting To Finish"</span>)</span><br><span class="line">	wg.Wait()</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="hljs-string">"\nTerminating Program"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行结果：</p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190811205853.png" alt></p>
+<p><strong>疑问？</strong>此处为什么是先打印 <code>大写字母</code> 而不是先打印 <code>小写字母</code> ？？？</p>
+<p><strong><span style="color:red;">TODO-1: <span></span></span></strong> 暂时存疑，后面研究一下单独写一篇博客来记录</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Golang/">#Golang</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Goroutine/">#Goroutine</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/08/10/HelloWorld/">Hello World</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://endless2xx.github.io/2019/08/11/Go語言并发入门1/';
+        this.page.identifier = '2019/08/11/Go語言并发入门1/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'endlexxblog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Endlexx&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/endless2xx">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
