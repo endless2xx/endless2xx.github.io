@@ -9,7 +9,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>Archives - Endlexx</title>
+<title>LeetCode848-字母移位 - Endlexx</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -27,16 +27,18 @@
 
 
 
-    <meta name="description" content="学海无涯">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Endlexx">
-<meta property="og:url" content="https://endless2xx.github.io/archives/index.html">
+    <meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode848-字母移位">
+<meta property="og:url" content="https://endless2xx.github.io/2019/08/18/LeetCode848-ShiftingLetters/index.html">
 <meta property="og:site_name" content="Endlexx">
-<meta property="og:description" content="学海无涯">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/2635611/pexels-photo-2635611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190818135142.png">
+<meta property="og:updated_time" content="2019-08-18T06:12:18.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Endlexx">
-<meta name="twitter:description" content="学海无涯">
+<meta name="twitter:title" content="LeetCode848-字母移位">
+<meta name="twitter:image" content="https://images.pexels.com/photos/2635611/pexels-photo-2635611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
 
 
 
@@ -94,7 +96,7 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item is-active" href="/archives">归档</a>
+            <a class="navbar-item " href="/archives">归档</a>
             
             <a class="navbar-item " href="/categories">分类</a>
             
@@ -113,6 +115,26 @@
             </a>
             
             
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#问题描述">1&nbsp;&nbsp;<b>问题描述</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#代码">2&nbsp;&nbsp;<b>代码</b></a>
+                    
+                </div>
+            </div>
+            
             
             <a class="navbar-item" title="GitHub" href="https://github.com/endless2xx">
                 
@@ -127,34 +149,91 @@
 
     <section class="section">
     <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            LeetCode848-字母移位
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-08-18T05:37:22.000Z" itemprop="datePublished">8月 18 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            1 分钟 read (About 178 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="https://images.pexels.com/photos/2635611/pexels-photo-2635611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="开局一张图"></p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p> 『848.字母移位』 <a href="https://leetcode.com/problems/shifting-letters/" target="_blank" rel="noopener">查看原题</a>  <a href="https://leetcode-cn.com/problems/shifting-letters/" target="_blank" rel="noopener">『中文』</a></p>
+<p> 『难度』<strong>🟡「Medium」</strong></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190818135142.png" alt></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> letters = []<span class="hljs-keyword">byte</span>&#123;<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>, <span class="hljs-string">'e'</span>, <span class="hljs-string">'f'</span>, <span class="hljs-string">'g'</span>, <span class="hljs-string">'h'</span>, <span class="hljs-string">'i'</span>, <span class="hljs-string">'j'</span>, <span class="hljs-string">'k'</span>, <span class="hljs-string">'l'</span>, <span class="hljs-string">'m'</span>, <span class="hljs-string">'n'</span>, <span class="hljs-string">'o'</span>, <span class="hljs-string">'p'</span>, <span class="hljs-string">'q'</span>, <span class="hljs-string">'r'</span>, <span class="hljs-string">'s'</span>, <span class="hljs-string">'t'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'v'</span>, <span class="hljs-string">'w'</span>, <span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	shifts := []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>&#125;</span><br><span class="line">	S := shiftingLetters(<span class="hljs-string">"abc"</span>, shifts)</span><br><span class="line">	fmt.Println(S)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shiftingLetters</span><span class="hljs-params">(S <span class="hljs-keyword">string</span>, shifts []<span class="hljs-keyword">int</span>)</span> <span class="hljs-title">string</span></span> &#123;</span><br><span class="line">	bs := []<span class="hljs-keyword">byte</span>(S)</span><br><span class="line">	move := <span class="hljs-number">0</span></span><br><span class="line">	<span class="hljs-keyword">for</span> i := <span class="hljs-built_in">len</span>(shifts) - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i-- &#123;</span><br><span class="line">		<span class="hljs-comment">// 需要移动的位数，因为字母表是循环的，所以对26取模就是移动的次数</span></span><br><span class="line">		move += (shifts[i] % <span class="hljs-number">26</span>)</span><br><span class="line">		bs[i] = letters[(<span class="hljs-keyword">int</span>(bs[i]-<span class="hljs-string">'a'</span>)+move)%<span class="hljs-number">26</span>]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-keyword">string</span>(bs)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/LeetCode/">#LeetCode</a></span>
+    
+    </div>
     
     
-        <div class="archive content">
-            <h4 class="title is-4" id="2019">2019</h4>
-            <div class="articles">
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-18T05:37:22.000Z" itemprop="datePublished">
-                        8月 18</time>
-                    <h6 class="title is-6"><a href="/2019/08/18/LeetCode848-ShiftingLetters/">LeetCode848-字母移位</a></h6>
-                </div>
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-11T07:23:41.000Z" itemprop="datePublished">
-                        8月 11</time>
-                    <h6 class="title is-6"><a href="/2019/08/11/Go語言并发入门1--goroutine/">Go語言并发入门1-goroutine</a></h6>
-                </div>
+            <a href="/2019/08/11/Go語言并发入门1--goroutine/">Go語言并发入门1-goroutine</a>
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-10T15:09:12.000Z" itemprop="datePublished">
-                        8月 10</time>
-                    <h6 class="title is-6"><a href="/2019/08/10/HelloWorld/">Hello World</a></h6>
-                </div>
-            
-            </div>
-        </div>
+        </span>
+    </div>
     
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
     
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://endless2xx.github.io/2019/08/18/LeetCode848-ShiftingLetters/';
+        this.page.identifier = '2019/08/18/LeetCode848-ShiftingLetters/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'endlexxblog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
