@@ -9,7 +9,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>Archives - Endlexx</title>
+<title>LeetCode1-TwoSum - Endlexx</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -27,16 +27,18 @@
 
 
 
-    <meta name="description" content="学海无涯">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Endlexx">
-<meta property="og:url" content="https://endless2xx.github.io/archives/index.html">
+    <meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode1-TwoSum">
+<meta property="og:url" content="https://endless2xx.github.io/2019/08/29/LeetCode1-TwoSum/index.html">
 <meta property="og:site_name" content="Endlexx">
-<meta property="og:description" content="学海无涯">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg">
+<meta property="og:image" content="c:/Users/AlanW/AppData/Roaming/Typora/typora-user-images/1567089463197.png">
+<meta property="og:updated_time" content="2019-08-29T14:40:35.333Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Endlexx">
-<meta name="twitter:description" content="学海无涯">
+<meta name="twitter:title" content="LeetCode1-TwoSum">
+<meta name="twitter:image" content="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg">
 
 
 
@@ -94,7 +96,7 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item is-active" href="/archives">归档</a>
+            <a class="navbar-item " href="/archives">归档</a>
             
             <a class="navbar-item " href="/categories">分类</a>
             
@@ -113,6 +115,32 @@
             </a>
             
             
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#问题描述">1&nbsp;&nbsp;<b>问题描述</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#思路分析">2&nbsp;&nbsp;<b>思路分析</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#代码">3&nbsp;&nbsp;<b>代码</b></a>
+                    
+                </div>
+            </div>
+            
             
             <a class="navbar-item" title="GitHub" href="https://github.com/endless2xx">
                 
@@ -127,40 +155,92 @@
 
     <section class="section">
     <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            LeetCode1-TwoSum
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-08-29T14:27:43.000Z" itemprop="datePublished">8月 29 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            1 分钟 read (About 193 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg" alt="开局一张图"></p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>『1.两数之和』 <a href="https://leetcode.com/problems/two-sum/submissions/" target="_blank" rel="noopener">查看原题</a>  <a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">中文</a></p>
+<p> 『难度』<strong>🟢「Easy」</strong></p>
+<p><img src="C:/Users/AlanW/AppData/Roaming/Typora/typora-user-images/1567089463197.png" alt="1567089463197"></p>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>假设遍历数组的第一个元素是2，而 target = 9，所以可以得知另一个值是 9-2 = 7，<br>然后去判断数组中是否有 7 这个元素，以此类推。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	nums := []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;</span><br><span class="line">	target := <span class="hljs-number">6</span></span><br><span class="line">	result := twoSum(nums, target)</span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 计算两数之和</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">twoSum</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>, target <span class="hljs-keyword">int</span>)</span> []<span class="hljs-title">int</span></span> &#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;</span><br><span class="line">        <span class="hljs-comment">// 获得另一个数</span></span><br><span class="line">		another := target - nums[i]</span><br><span class="line">		<span class="hljs-keyword">for</span> j := i + <span class="hljs-number">1</span>; j &lt; <span class="hljs-built_in">len</span>(nums); j++ &#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> nums[j] == another &#123;</span><br><span class="line">				result := []<span class="hljs-keyword">int</span>&#123;i, j&#125;</span><br><span class="line">				<span class="hljs-keyword">return</span> result</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/LeetCode/">#LeetCode</a></span>
+    
+    </div>
     
     
-        <div class="archive content">
-            <h4 class="title is-4" id="2019">2019</h4>
-            <div class="articles">
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-29T14:27:43.000Z" itemprop="datePublished">
-                        8月 29</time>
-                    <h6 class="title is-6"><a href="/2019/08/29/LeetCode1-TwoSum/">LeetCode1-TwoSum</a></h6>
-                </div>
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-18T05:37:22.000Z" itemprop="datePublished">
-                        8月 18</time>
-                    <h6 class="title is-6"><a href="/2019/08/18/LeetCode848-ShiftingLetters/">LeetCode848-字母移位</a></h6>
-                </div>
+            <a href="/2019/08/18/LeetCode848-ShiftingLetters/">LeetCode848-字母移位</a>
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-11T07:23:41.000Z" itemprop="datePublished">
-                        8月 11</time>
-                    <h6 class="title is-6"><a href="/2019/08/11/Go語言并发入门1--goroutine/">Go語言并发入门1-goroutine</a></h6>
-                </div>
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-08-10T15:09:12.000Z" itemprop="datePublished">
-                        8月 10</time>
-                    <h6 class="title is-6"><a href="/2019/08/10/HelloWorld/">Hello World</a></h6>
-                </div>
-            
-            </div>
-        </div>
+        </span>
+    </div>
     
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
     
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://endless2xx.github.io/2019/08/29/LeetCode1-TwoSum/';
+        this.page.identifier = '2019/08/29/LeetCode1-TwoSum/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'endlexxblog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
