@@ -34,8 +34,8 @@
 <meta property="og:site_name" content="Endlexx">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg">
-<meta property="og:image" content="c:/Users/AlanW/AppData/Roaming/Typora/typora-user-images/1567089463197.png">
-<meta property="og:updated_time" content="2019-08-29T14:40:35.333Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190829224619.png">
+<meta property="og:updated_time" content="2019-08-29T14:48:22.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode1-TwoSum">
 <meta name="twitter:image" content="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg">
@@ -175,7 +175,7 @@
         <span class="column is-narrow">
             
             
-            1 分钟 read (About 193 words)
+            1 分钟 read (About 192 words)
         </span>
         
     </div>
@@ -186,7 +186,7 @@
 
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>『1.两数之和』 <a href="https://leetcode.com/problems/two-sum/submissions/" target="_blank" rel="noopener">查看原题</a>  <a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">中文</a></p>
 <p> 『难度』<strong>🟢「Easy」</strong></p>
-<p><img src="C:/Users/AlanW/AppData/Roaming/Typora/typora-user-images/1567089463197.png" alt="1567089463197"></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190829224619.png" alt></p>
 <h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>假设遍历数组的第一个元素是2，而 target = 9，所以可以得知另一个值是 9-2 = 7，<br>然后去判断数组中是否有 7 这个元素，以此类推。</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	nums := []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;</span><br><span class="line">	target := <span class="hljs-number">6</span></span><br><span class="line">	result := twoSum(nums, target)</span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 计算两数之和</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">twoSum</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>, target <span class="hljs-keyword">int</span>)</span> []<span class="hljs-title">int</span></span> &#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;</span><br><span class="line">        <span class="hljs-comment">// 获得另一个数</span></span><br><span class="line">		another := target - nums[i]</span><br><span class="line">		<span class="hljs-keyword">for</span> j := i + <span class="hljs-number">1</span>; j &lt; <span class="hljs-built_in">len</span>(nums); j++ &#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> nums[j] == another &#123;</span><br><span class="line">				result := []<span class="hljs-keyword">int</span>&#123;i, j&#125;</span><br><span class="line">				<span class="hljs-keyword">return</span> result</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
