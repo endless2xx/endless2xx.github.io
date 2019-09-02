@@ -18,7 +18,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>Go语言基础-01-数组篇 - 无尽的博客</title>
+<title>Go语言基础-01-数组 - 无尽的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -40,16 +40,17 @@
 
     <meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言基础-01-数组篇">
+<meta property="og:title" content="Go语言基础-01-数组">
 <meta property="og:url" content="https://endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/index.html">
 <meta property="og:site_name" content="无尽的博客">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.pexels.com/photos/1841941/pexels-photo-1841941.jpeg?cs=srgb&dl=fog-foggy-houses-1841941.jpg&fm=jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190901222224.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190902005207.png">
-<meta property="og:updated_time" content="2019-09-01T17:15:35.019Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190902234730.png">
+<meta property="og:updated_time" content="2019-09-02T16:14:49.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go语言基础-01-数组篇">
+<meta name="twitter:title" content="Go语言基础-01-数组">
 <meta name="twitter:image" content="https://images.pexels.com/photos/1841941/pexels-photo-1841941.jpeg?cs=srgb&dl=fog-foggy-houses-1841941.jpg&fm=jpg">
 
 
@@ -122,13 +123,13 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="搜索" href="javascript:;">
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
             
             <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
-                <a class="navbar-item" title="目录">
+                <a class="navbar-item" title="目錄">
                     <i class="fa fa-list"></i>
                 </a>
                 <div class="navbar-dropdown is-right">
@@ -196,7 +197,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Go语言基础-01-数组篇
+            Go语言基础-01-数组
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -213,7 +214,7 @@
         <span class="column is-narrow">
             
             
-            10 分钟 读完 (约 1481 字)
+            10 分钟 讀完 (約 1490 字)
         </span>
         
     </div>
@@ -280,6 +281,7 @@
 <h2 id="在函数间传递数组"><a href="#在函数间传递数组" class="headerlink" title="在函数间传递数组"></a>在函数间传递数组</h2><p>Go 语言中，在函数间传递参数时总是以 <strong>值</strong> 的方式传递的（<strong>值传递</strong>），如果时数组也会完整的赋值出一个数组传递给函数。</p>
 <p>为了性能方面考虑，较好的方法时使用指针来传递数组的地址</p>
 <p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 使用指针传递数组</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	array := [<span class="hljs-number">100</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	foo(&amp;array)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">(array *[100]<span class="hljs-keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="hljs-comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190902234730.png" alt></p>
 
     
     </div>
@@ -310,7 +312,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">评论</h3>
+    <h3 class="title is-4">評論</h3>
     
 <script>
     var disqus_config = function () {
@@ -512,7 +514,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -525,10 +527,10 @@
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
             },
             CONTENT_URL: '/content.json',
         };
