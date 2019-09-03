@@ -18,7 +18,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>关于本站 - 无尽的博客</title>
+<title>LeetCode7-ReverseInteger - 无尽的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -38,18 +38,18 @@
 
 
 
-    <meta name="description" content="About Me12345// 想好了再写type Coder struct &amp;#123;    name string    email string&amp;#125;  TODO List存疑的问题，先再此处记录    问题 存档日期 解决日期 解决方案    测试 2019年8月31日 2019年8月31日 ✅测试   更新记录 2019年8月10日 周六 开启本博客，使用 Hexo 生成，基于">
-<meta name="keywords" content="无尽的博客,无尽,Golang,Java,后端开发,程序员,技术博客,技术学习,Endlexx">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于本站">
-<meta property="og:url" content="https://endless2xx.github.io/about/index.html">
+    <meta name="keywords" content="Golang,LeetCode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode7-ReverseInteger">
+<meta property="og:url" content="https://endless2xx.github.io/2019/09/02/LeetCode7-ReverseInteger/index.html">
 <meta property="og:site_name" content="无尽的博客">
-<meta property="og:description" content="About Me12345// 想好了再写type Coder struct &amp;#123;    name string    email string&amp;#125;  TODO List存疑的问题，先再此处记录    问题 存档日期 解决日期 解决方案    测试 2019年8月31日 2019年8月31日 ✅测试   更新记录 2019年8月10日 周六 开启本博客，使用 Hexo 生成，基于">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-31T12:50:36.055Z">
+<meta property="og:image" content="https://images.pexels.com/photos/1416900/pexels-photo-1416900.jpeg?cs=srgb&dl=4k-wallpaper-altitude-boulder-1416900.jpg&fm=jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190902231746.png">
+<meta property="og:updated_time" content="2019-09-02T15:33:57.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于本站">
-<meta name="twitter:description" content="About Me12345// 想好了再写type Coder struct &amp;#123;    name string    email string&amp;#125;  TODO List存疑的问题，先再此处记录    问题 存档日期 解决日期 解决方案    测试 2019年8月31日 2019年8月31日 ✅测试   更新记录 2019年8月10日 周六 开启本博客，使用 Hexo 生成，基于">
+<meta name="twitter:title" content="LeetCode7-ReverseInteger">
+<meta name="twitter:image" content="https://images.pexels.com/photos/1416900/pexels-photo-1416900.jpeg?cs=srgb&dl=4k-wallpaper-altitude-boulder-1416900.jpg&fm=jpg">
 
 
 
@@ -115,7 +115,7 @@
             
             <a class="navbar-item " href="/music">画廊</a>
             
-            <a class="navbar-item is-active" href="/about">关于</a>
+            <a class="navbar-item " href="/about">关于</a>
             
         </div>
         
@@ -135,19 +135,25 @@
                     
                     
                     
-                    <a class="navbar-item" href="#About-Me">1&nbsp;&nbsp;<b>About Me</b></a>
+                    <a class="navbar-item" href="#问题描述">1&nbsp;&nbsp;<b>问题描述</b></a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#TODO-List">2&nbsp;&nbsp;<b>TODO List</b></a>
+                    <a class="navbar-item" href="#思路分析">2&nbsp;&nbsp;<b>思路分析</b></a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#更新记录">3&nbsp;&nbsp;<b>更新记录</b></a>
+                    <a class="navbar-item" href="#代码">3&nbsp;&nbsp;<b>代码</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#学习别人的解题方法">4&nbsp;&nbsp;<b>学习别人的解题方法</b></a>
                     
                 </div>
             </div>
@@ -169,50 +175,66 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            关于本站
+            LeetCode7-ReverseInteger
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2019-08-10T04:35:55.000Z" itemprop="datePublished">8月 10 2019</time>
+            <time datetime="2019-09-02T15:06:07.000Z" itemprop="datePublished">9月 2 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            几秒 讀完 (約 92 字)
+            2 分钟 讀完 (約 351 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h1 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me"></a>About Me</h1><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 想好了再写</span></span><br><span class="line"><span class="hljs-keyword">type</span> Coder <span class="hljs-keyword">struct</span> &#123;</span><br><span class="line">    name <span class="hljs-keyword">string</span></span><br><span class="line">    email <span class="hljs-keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="TODO-List"><a href="#TODO-List" class="headerlink" title="TODO List"></a>TODO List</h1><p>存疑的问题，先再此处记录</p>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th>存档日期</th>
-<th>解决日期</th>
-<th>解决方案</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>测试</td>
-<td>2019年8月31日</td>
-<td>2019年8月31日</td>
-<td>✅测试</td>
-</tr>
-</tbody></table>
-<h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><ul>
-<li><strong>2019年8月10日 周六</strong> 开启本博客，使用 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 生成，基于 <a href="https://github.com/ppoffice/hexo-theme-minos" target="_blank" rel="noopener">Minos</a> 主题</li>
-</ul>
+        <p><img src="https://images.pexels.com/photos/1416900/pexels-photo-1416900.jpeg?cs=srgb&dl=4k-wallpaper-altitude-boulder-1416900.jpg&fm=jpg" alt="开局一张图"></p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>『7.两数之和』 <a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="noopener">查看原题</a>  <a href="https://leetcode-cn.com/problems/reverse-integer/" target="_blank" rel="noopener">中文</a></p>
+<p> 『难度』<strong>🟢「Easy」</strong></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190902231746.png" alt></p>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>通过取模将数字从地位到高位的取出放到切片中（个位上的数字位切片的第一个元素），然后遍历切片以此乘以相应个10（比如千位上的数字乘以100），注意上图中红色标出的部分，需要判断是否溢出</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> (</span><br><span class="line">	<span class="hljs-string">"fmt"</span></span><br><span class="line">	<span class="hljs-string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 7. 整数反转</span></span><br><span class="line"><span class="hljs-comment">// 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	result := reverse(<span class="hljs-number">2019</span>)</span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reverse</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span> </span></span><br><span class="line"><span class="hljs-function">	<span class="hljs-title">arr</span> := []<span class="hljs-title">int</span></span>&#123;&#125;</span><br><span class="line">	i := <span class="hljs-number">0</span></span><br><span class="line">	<span class="hljs-keyword">for</span> x != <span class="hljs-number">0</span> &#123;</span><br><span class="line">		arr = <span class="hljs-built_in">append</span>(arr, x%<span class="hljs-number">10</span>)</span><br><span class="line">		i++</span><br><span class="line">		x = x / <span class="hljs-number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-comment">// 获取切片的长度</span></span><br><span class="line">	arrLen := <span class="hljs-built_in">len</span>(arr)</span><br><span class="line">	temp := <span class="hljs-number">0</span></span><br><span class="line">	<span class="hljs-keyword">for</span> i, v := <span class="hljs-keyword">range</span> arr &#123;</span><br><span class="line">        <span class="hljs-comment">// num=3 表示千位数，num=2 表示百位数</span></span><br><span class="line">		num := arrLen - (i + <span class="hljs-number">1</span>)</span><br><span class="line">		temp += v * getTens(num)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-comment">// 如果不在下面的范围内则返回 0</span></span><br><span class="line">	<span class="hljs-keyword">if</span> !(temp &gt;= math.MinInt32 &amp;&amp; temp &lt;= math.MaxInt32) &#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// 如果是千位上的数返回100，以此类推</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getTens</span><span class="hljs-params">(num <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;</span><br><span class="line">	tens := <span class="hljs-number">1</span></span><br><span class="line">	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; num; i++ &#123;</span><br><span class="line">		tens *= <span class="hljs-number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> tens</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="学习别人的解题方法"><a href="#学习别人的解题方法" class="headerlink" title="学习别人的解题方法"></a>学习别人的解题方法</h2><p>只用了11行代码</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reverse</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;</span><br><span class="line">    y := <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">for</span> x!=<span class="hljs-number">0</span> &#123;</span><br><span class="line">        y = y*<span class="hljs-number">10</span> + x%<span class="hljs-number">10</span></span><br><span class="line">        <span class="hljs-keyword">if</span> !( -(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>) &lt;= y &amp;&amp; y &lt;= (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)<span class="hljs-number">-1</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        x /= <span class="hljs-number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Golang/">#Golang</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/LeetCode/">#LeetCode</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/算法/">#算法</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/09/03/Golang-Basic02-Slice/">Go语言基础-02-切片</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/09/01/Golang-Basic01-Arrays/">Go语言基础-01-数组</a>
+            
+        </span>
+    </div>
     
 </article>
 
@@ -224,8 +246,8 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://endless2xx.github.io/about/index.html';
-        this.page.identifier = 'about/index.html';
+        this.page.url = 'https://endless2xx.github.io/2019/09/02/LeetCode7-ReverseInteger/';
+        this.page.identifier = '2019/09/02/LeetCode7-ReverseInteger/';
         
         this.language = 'zh';
         

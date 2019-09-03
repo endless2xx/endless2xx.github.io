@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://endless2xx.github.io/2019/09/03/Golang-Basic02-Slice/</loc>
+    <lastmod>2019-09-02</lastmod>
+  </url>  <url>
+    <loc>https://endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/</loc>
+    <lastmod>2019-09-02</lastmod>
+  </url>  <url>
+    <loc>https://endless2xx.github.io/2019/09/02/LeetCode7-ReverseInteger/</loc>
+    <lastmod>2019-09-02</lastmod>
+  </url>  <url>
     <loc>https://endless2xx.github.io/2019/08/31/LeetCode2-AddTwoNumbers/</loc>
-    <lastmod>2019-08-31</lastmod>
+    <lastmod>2019-09-02</lastmod>
   </url>  <url>
     <loc>https://endless2xx.github.io/2019/08/18/LeetCode848-ShiftingLetters/</loc>
     <lastmod>2019-08-31</lastmod>

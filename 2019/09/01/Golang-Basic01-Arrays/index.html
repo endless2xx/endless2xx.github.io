@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146845365-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-146845365-1');
+</script>
+
+<script type="text/javascript">
+    var host = "https://endless2xx.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+    <meta charset="utf-8">
+<title>Go语言基础-01-数组 - 无尽的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+
+
+
+<meta name="description" content="吃学习的苦，还是吃生活的苦？">
+
+
+
+<meta name="keywords" content="无尽的博客,无尽,Golang,Java,后端开发,程序员,技术博客,技术学习,Endlexx">
+
+
+
+    <meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言基础-01-数组">
+<meta property="og:url" content="https://endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/index.html">
+<meta property="og:site_name" content="无尽的博客">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/1841941/pexels-photo-1841941.jpeg?cs=srgb&dl=fog-foggy-houses-1841941.jpg&fm=jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190901222224.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190902005207.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190902234730.png">
+<meta property="og:updated_time" content="2019-09-02T16:14:49.660Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言基础-01-数组">
+<meta name="twitter:image" content="https://images.pexels.com/photos/1841941/pexels-photo-1841941.jpeg?cs=srgb&dl=fog-foggy-houses-1841941.jpg&fm=jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">归档</a>
+            
+            <a class="navbar-item " href="/categories">分类</a>
+            
+            <a class="navbar-item " href="/tags">标签</a>
+            
+            <a class="navbar-item " href="/music">画廊</a>
+            
+            <a class="navbar-item " href="/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目錄">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#数组的内部实现">1&nbsp;&nbsp;<b>数组的内部实现</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#数组的声明和初始化">2&nbsp;&nbsp;<b>数组的声明和初始化</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#数组的比较">3&nbsp;&nbsp;<b>数组的比较</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#使用数组">4&nbsp;&nbsp;<b>使用数组</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#访问元素，直接使用数组的索引">4.1&nbsp;&nbsp;访问元素，直接使用数组的索引</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#赋值操作">4.2&nbsp;&nbsp;赋值操作</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#多维数组">5&nbsp;&nbsp;<b>多维数组</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#在函数间传递数组">6&nbsp;&nbsp;<b>在函数间传递数组</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/endless2xx">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Go语言基础-01-数组
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-09-01T13:14:50.000Z" itemprop="datePublished">9月 1 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Golang/">Golang</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 分钟 讀完 (約 1490 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="https://images.pexels.com/photos/1841941/pexels-photo-1841941.jpeg?cs=srgb&dl=fog-foggy-houses-1841941.jpg&fm=jpg" alt="开局一张图"></p>
+<a id="more"></a>
+
+<h2 id="数组的内部实现"><a href="#数组的内部实现" class="headerlink" title="数组的内部实现"></a>数组的内部实现</h2><ol>
+<li>长度固定</li>
+<li>内存空间连续，有利于计算索引，快速迭代数据</li>
+<li>数组的元素类型相同，每个元素占用空间大小相同，方便快速计算元素的内存位置</li>
+<li>长度是数组类型的一部分，相同类型不同长度的数组是不同的数据类型</li>
+</ol>
+<h2 id="数组的声明和初始化"><a href="#数组的声明和初始化" class="headerlink" title="数组的声明和初始化"></a>数组的声明和初始化</h2><blockquote>
+<p>指定数组长度，使用默认值「零值」初始</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">3</span>] <span class="hljs-keyword">int</span> &#123;&#125;  <span class="hljs-comment">// 数组中的元素都会被初始化为 int 类型的零值</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>指定数组长度，使用字面量初始化</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">3</span>] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">3</span>, <span class="hljs-number">2</span>&#125;	<span class="hljs-comment">// 字面量不够时剩下的元素初始化为零值</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>指定数组长度，并初始化指定的元素</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">3</span>] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>:<span class="hljs-number">100</span>, <span class="hljs-number">2</span>:<span class="hljs-number">200</span>&#125; <span class="hljs-comment">// 指定的元素被初始为相应的值，其他的元素使用零值</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>不指定数组长度，通过字面量来计算长度</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 更具字面量个数计算数组的长度</span></span><br><span class="line">array1 := [...]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 更具指定的最大元素的下标来计算数组的长度，本例子中最大元素下标为8，因此数组的长度为9</span></span><br><span class="line"><span class="hljs-comment">// 其他的元素初始化为0</span></span><br><span class="line">array2 := [...]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">8</span>: <span class="hljs-number">200</span>&#125;</span><br><span class="line">array3 := [...]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">8</span>: <span class="hljs-number">200</span>, <span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意1：初始值全部为字面量的直接按照顺序初始化，如：{1, 3, 5, 7, 9, 11}</strong></p>
+<p><strong>注意2：初始值全部为指定的元素的值初始化指定元素，且不需要按照顺序写，比如 {8: 100, 1: 200}</strong></p>
+<p><strong>注意3：顺序字面量和指定元素混合使用</strong></p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 报错：duplicate index in array literal: 2，因为指定的第二个元素已经被字面量初始化了</span></span><br><span class="line">arr1 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>: <span class="hljs-number">200</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 正确写法：应该将第二个元素写在正确的顺序上</span></span><br><span class="line">arr2 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">2</span>: <span class="hljs-number">200</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 下面的也是正确的写法，如果指定的元素例如 &#123;8： 200&#125; 明显是数组中的最大的索引，则可以放在任何位置</span></span><br><span class="line">arr3 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">8</span>: <span class="hljs-number">200</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>演示代码片段</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	<span class="hljs-comment">// 1：声明使用默认值初始化的数组</span></span><br><span class="line">	array1 := [<span class="hljs-number">3</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"1: "</span>, array1)</span><br><span class="line">	<span class="hljs-comment">// 2：使用字面量初始化数组</span></span><br><span class="line">	<span class="hljs-comment">// 字面量不够时剩下的元素初始化为零值</span></span><br><span class="line">	array2 := [<span class="hljs-number">3</span>]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"2: "</span>, array2)</span><br><span class="line">	<span class="hljs-comment">// 3: 指定特定元素的值，其他元素默认零值</span></span><br><span class="line">	array3 := [<span class="hljs-number">3</span>]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>: <span class="hljs-number">10</span>, <span class="hljs-number">2</span>: <span class="hljs-number">100</span>&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"3: "</span>, array3)</span><br><span class="line">	<span class="hljs-comment">// 4: 更具字面量计算数组长度</span></span><br><span class="line">	array4 := [...]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"4: "</span>, array4)</span><br><span class="line">    <span class="hljs-comment">// array5 := [...]int&#123;8: 200, 1: 100, 3, 4, 3, 2, 1, 2&#125; 这样也可以</span></span><br><span class="line">	array5 := [...]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>: <span class="hljs-number">100</span>, <span class="hljs-number">8</span>: <span class="hljs-number">200</span>&#125;</span><br><span class="line">	fmt.Println(<span class="hljs-string">"5: "</span>, array5)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>执行结果</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190901222224.png" alt></p>
+<blockquote>
+<p>除了上面使用顺序初始值序列来初始化数组，还有一种方式初始化数组，如下</p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Currency 货币符号</span></span><br><span class="line"><span class="hljs-keyword">type</span> Currency <span class="hljs-keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// USD 美元</span></span><br><span class="line"><span class="hljs-keyword">const</span> (</span><br><span class="line">	USD Currency = <span class="hljs-literal">iota</span> <span class="hljs-comment">// 美元</span></span><br><span class="line">	EUR                 <span class="hljs-comment">// 欧元</span></span><br><span class="line">	GBP                 <span class="hljs-comment">// 英镑</span></span><br><span class="line">	RMB                 <span class="hljs-comment">// 人民币</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">symbol := [...]<span class="hljs-keyword">string</span>&#123;USD: <span class="hljs-string">"$"</span>, EUR: <span class="hljs-string">"€"</span>, GBP: <span class="hljs-string">"￡"</span>, RMB: <span class="hljs-string">"￥"</span>&#125;</span><br><span class="line">fmt.Println(symbol)</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组的比较"><a href="#数组的比较" class="headerlink" title="数组的比较"></a>数组的比较</h2><blockquote>
+<p>如果数组的 <code>元素类型</code> 时可以比较的，那么数组也时可以比较的，可以使用 <code>==</code> 比较两个数组，只有当两个数组元素都是相等的数组才是相等的，<code>!=</code> 比较符号同理</p>
+<p><strong>注意：两个数组的类型必须相同（包括数组的长度相同）才能比较</strong></p>
+<p>否则会报错 <code>invalid operation: array1 == array4 (mismatched types [3]int and [6]int)</code></p>
+</blockquote>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">array1 := [<span class="hljs-number">3</span>] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;</span><br><span class="line">array2 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>， <span class="hljs-number">2</span>， <span class="hljs-number">3</span>&#125;</span><br><span class="line">array3 := [<span class="hljs-number">3</span>] <span class="hljs-keyword">int</span> &#123;&#125;</span><br><span class="line">fmt.Println(array1==array2) <span class="hljs-comment">// true</span></span><br><span class="line">fmt.Println(array1==array3) <span class="hljs-comment">// false</span></span><br><span class="line">array4 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;</span><br><span class="line">fmt.Println(array1==array4) <span class="hljs-comment">// compile error 编译报错，无法比较，两个数组不是相同的类型</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="使用数组"><a href="#使用数组" class="headerlink" title="使用数组"></a>使用数组</h2><h3 id="访问元素，直接使用数组的索引"><a href="#访问元素，直接使用数组的索引" class="headerlink" title="访问元素，直接使用数组的索引"></a>访问元素，直接使用数组的索引</h3><p>数组内存空间是联系的，可以快速高效的访问元素</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建一个数组，并初始化</span></span><br><span class="line">array1 := [...] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 修改地 2 个元素的值</span></span><br><span class="line">array1[<span class="hljs-number">2</span>] = <span class="hljs-number">200</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 元素是指针类型</span></span><br><span class="line">array2 := [...]*<span class="hljs-keyword">int</span>&#123;<span class="hljs-built_in">new</span>(<span class="hljs-keyword">int</span>), <span class="hljs-built_in">new</span>(<span class="hljs-keyword">int</span>)&#125;</span><br><span class="line">fmt.Println(array2)</span><br><span class="line"><span class="hljs-comment">// 修改指针类型元素的值</span></span><br><span class="line">*array2[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span></span><br><span class="line">*array2[<span class="hljs-number">1</span>] = <span class="hljs-number">200</span></span><br><span class="line">fmt.Println(*array2[<span class="hljs-number">1</span>]) <span class="hljs-comment">// 200</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="赋值操作"><a href="#赋值操作" class="headerlink" title="赋值操作"></a>赋值操作</h3><p>Go 语言中，数组是一个值，相同类型的数组可以赋值给另一个数组</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 数组的赋值操作</span></span><br><span class="line">array1 := [<span class="hljs-number">5</span>]<span class="hljs-keyword">string</span>&#123;&#125;</span><br><span class="line">array2 := [...]<span class="hljs-keyword">string</span>&#123;<span class="hljs-string">"Red"</span>, <span class="hljs-string">"Blue"</span>, <span class="hljs-string">"Green"</span>, <span class="hljs-string">"Yellow"</span>, <span class="hljs-string">"pink"</span>&#125;</span><br><span class="line">array1 = array2</span><br><span class="line"><span class="hljs-comment">// 两个数组的元素相同</span></span><br><span class="line">fmt.Println(array1)</span><br><span class="line">fmt.Println(array2)</span><br></pre></td></tr></table></figure></p>
+<p><strong>如果两个数组的长度不同，则不是相同类型的数组，赋值时会编译报错</strong></p>
+<p><strong>如果数组元素时指针类型的，则赋值的时候值会赋值元素的值（地址）而不是指针指向的值</strong></p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">array1 := [...]*<span class="hljs-keyword">string</span>&#123;<span class="hljs-built_in">new</span>(<span class="hljs-keyword">string</span>), <span class="hljs-built_in">new</span>(<span class="hljs-keyword">string</span>), <span class="hljs-built_in">new</span>(<span class="hljs-keyword">string</span>)&#125;</span><br><span class="line">*array1[<span class="hljs-number">0</span>] = <span class="hljs-string">"Red"</span></span><br><span class="line">*array1[<span class="hljs-number">1</span>] = <span class="hljs-string">"Blue"</span></span><br><span class="line">*array1[<span class="hljs-number">2</span>] = <span class="hljs-string">"Green"</span></span><br><span class="line"><span class="hljs-comment">// 指针类型数组的赋值操作</span></span><br><span class="line">array2 := [<span class="hljs-number">3</span>]*<span class="hljs-keyword">string</span>&#123;&#125;</span><br><span class="line">array2 = array1</span><br><span class="line">fmt.Println(array2)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190902005207.png" alt></p>
+<h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><p>多维数组和上述的一维数组大同小异，具体不在赘述，请参考以下代码</p>
+<p><strong>需要注意的是可以将多维数组的其中一个维度的数组赋值给一个一维数组</strong></p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 多维数组</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	<span class="hljs-comment">// 二维数组</span></span><br><span class="line">	<span class="hljs-keyword">var</span> array1 [<span class="hljs-number">4</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span></span><br><span class="line">	fmt.Println(array1)</span><br><span class="line">	<span class="hljs-comment">// 使用字面量初始化</span></span><br><span class="line">	array2 := [<span class="hljs-number">4</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;, &#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;, &#123;<span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;, &#123;<span class="hljs-number">5</span>, <span class="hljs-number">6</span>&#125;&#125;</span><br><span class="line">	fmt.Println(array2)</span><br><span class="line">	<span class="hljs-comment">// 初始化两个维度的指定元素的值</span></span><br><span class="line">	array3 := [<span class="hljs-number">4</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>: &#123;<span class="hljs-number">0</span>: <span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;&#125;</span><br><span class="line">	fmt.Println(array3)</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//////////////////////////////////////////</span></span><br><span class="line">	<span class="hljs-comment">// 访问数组的元素</span></span><br><span class="line">	array4 := [<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	array4[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">10</span></span><br><span class="line">	array4[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">20</span></span><br><span class="line">	array4[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">30</span></span><br><span class="line">	array4[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">40</span></span><br><span class="line">	fmt.Println(array4)</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//////////////////////////////////////////</span></span><br><span class="line">	<span class="hljs-comment">// 赋值: 两个相同维度的数组</span></span><br><span class="line">	array5 := [<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	array6 := [<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	array6[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">10</span></span><br><span class="line">	array6[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">20</span></span><br><span class="line">	array6[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">30</span></span><br><span class="line">	array6[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">40</span></span><br><span class="line">	array5 = array6</span><br><span class="line">	fmt.Println(array5)</span><br><span class="line">	<span class="hljs-comment">// 独立的将某个维度的元素赋值给另一个元素，如下</span></span><br><span class="line">	<span class="hljs-comment">// 将二维数组 array6 中的第二个元素中的数组 &#123;30, 40&#125; 赋值给了一维数组 array7</span></span><br><span class="line">	array7 := [<span class="hljs-number">2</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	array7 = array6[<span class="hljs-number">1</span>]</span><br><span class="line">	fmt.Println(array7)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="在函数间传递数组"><a href="#在函数间传递数组" class="headerlink" title="在函数间传递数组"></a>在函数间传递数组</h2><p>Go 语言中，在函数间传递参数时总是以 <strong>值</strong> 的方式传递的（<strong>值传递</strong>），如果时数组也会完整的赋值出一个数组传递给函数。</p>
+<p>为了性能方面考虑，较好的方法时使用指针来传递数组的地址</p>
+<p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 使用指针传递数组</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	array := [<span class="hljs-number">100</span>]<span class="hljs-keyword">int</span>&#123;&#125;</span><br><span class="line">	foo(&amp;array)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">(array *[100]<span class="hljs-keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="hljs-comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190902234730.png" alt></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Golang/">#Golang</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/09/02/LeetCode7-ReverseInteger/">LeetCode7-ReverseInteger</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/08/31/LeetCode2-AddTwoNumbers/">LeetCode2-AddTwoNumbers</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/';
+        this.page.identifier = '2019/09/01/Golang-Basic01-Arrays/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'endlexxblog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Endlexx&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/endless2xx">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
