@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>endless2xx.github.io/2019/09/03/Golang-Basic02-Slice/</loc>
+    <loc>https://endless2xx.github.io/2019/09/03/Golang-Basic02-Slice/</loc>
     <lastmod>2019-09-04</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/</loc>
+    <loc>https://endless2xx.github.io/2019/09/01/Golang-Basic01-Arrays/</loc>
     <lastmod>2019-09-03</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/09/02/LeetCode7-ReverseInteger/</loc>
+    <loc>https://endless2xx.github.io/2019/09/02/LeetCode7-ReverseInteger/</loc>
     <lastmod>2019-09-02</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/08/31/LeetCode2-AddTwoNumbers/</loc>
+    <loc>https://endless2xx.github.io/2019/08/31/LeetCode2-AddTwoNumbers/</loc>
     <lastmod>2019-09-02</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/08/18/LeetCode848-ShiftingLetters/</loc>
+    <loc>https://endless2xx.github.io/2019/08/18/LeetCode848-ShiftingLetters/</loc>
     <lastmod>2019-08-31</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/08/29/LeetCode1-TwoSum/</loc>
+    <loc>https://endless2xx.github.io/2019/08/29/LeetCode1-TwoSum/</loc>
     <lastmod>2019-08-31</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/08/11/Go%E8%AA%9E%E8%A8%80%E5%B9%B6%E5%8F%91%E5%85%A5%E9%97%A81--goroutine/</loc>
+    <loc>https://endless2xx.github.io/2019/08/11/Go%E8%AA%9E%E8%A8%80%E5%B9%B6%E5%8F%91%E5%85%A5%E9%97%A81--goroutine/</loc>
     <lastmod>2019-08-11</lastmod>
   </url>  <url>
-    <loc>endless2xx.github.io/2019/08/10/HelloWorld/</loc>
+    <loc>https://endless2xx.github.io/2019/08/10/HelloWorld/</loc>
     <lastmod>2019-08-11</lastmod>
   </url>
 </urlset>
