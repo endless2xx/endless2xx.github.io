@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190904003126.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190904000104.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190904001836.png">
-<meta property="og:updated_time" content="2019-09-03T16:31:39.515Z">
+<meta property="og:updated_time" content="2019-09-04T16:09:35.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go语言基础-02-切片">
 <meta name="twitter:image" content="https://images.pexels.com/photos/169905/pexels-photo-169905.jpeg?cs=srgb&dl=bay-beach-beautiful-169905.jpg&fm=jpg">
@@ -126,13 +126,13 @@
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Search" href="javascript:;">
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
             
             <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
-                <a class="navbar-item" title="Table of Contents">
+                <a class="navbar-item" title="目錄">
                     <i class="fa fa-list"></i>
                 </a>
                 <div class="navbar-dropdown is-right">
@@ -182,6 +182,22 @@
                     
                     <a class="navbar-item" href="#切片增长">3.2&nbsp;&nbsp;切片增长</a>
                     
+                    
+                    
+                    <a class="navbar-item" href="#创建切片时的3个索引">3.3&nbsp;&nbsp;创建切片时的3个索引</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#设置切片的长度和容量">3.3.1&nbsp;&nbsp;设置切片的长度和容量</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#设置的容量超过已有容量时报错">3.3.2&nbsp;&nbsp;设置的容量超过已有容量时报错</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#设置长度和容量一样的好处">3.3.3&nbsp;&nbsp;设置长度和容量一样的好处</a>
+                    
                 </div>
             </div>
             
@@ -219,7 +235,7 @@
         <span class="column is-narrow">
             
             
-            7 分钟 read (About 1118 words)
+            9 分钟 讀完 (約 1411 字)
         </span>
         
     </div>
@@ -301,7 +317,10 @@
 <p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建切片</span></span><br><span class="line">slice := [] <span class="hljs-keyword">int</span> &#123;<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 想切片中追加新元素</span></span><br><span class="line"><span class="hljs-comment">// 将新元素赋值为 50</span></span><br><span class="line">newSlice := <span class="hljs-built_in">append</span>(slice, <span class="hljs-number">50</span>)</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190904001836.png" alt></p>
 <p>append 函数会智能的处理底层数组的长度，切片的容量小于 1000 时，总是成倍的增加容量，超过 1000 后，容量的增长因子会设为 1.25，即每次增长 25% 的容量</p>
-
+<h3 id="创建切片时的3个索引"><a href="#创建切片时的3个索引" class="headerlink" title="创建切片时的3个索引"></a>创建切片时的3个索引</h3><p>在创建切片时，还有第三个索引可以使用。第三个索引是用来控制新切片的容量来限制容量，在明确所需的切片大致容量时，指定一个容量能够避免切片扩容带来的性能损耗。</p>
+<h4 id="设置切片的长度和容量"><a href="#设置切片的长度和容量" class="headerlink" title="设置切片的长度和容量"></a>设置切片的长度和容量</h4><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 指定切片的长度为 5，容量为 10</span></span><br><span class="line"><span class="hljs-comment">// 只有在使用的长度超过 容量时 切片才会去扩容</span></span><br><span class="line">slice1 := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">10</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">20</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">30</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">40</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">50</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">60</span>)</span><br><span class="line">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">70</span>)</span><br><span class="line">fmt.Println(slice1)</span><br></pre></td></tr></table></figure></p>
+<h4 id="设置的容量超过已有容量时报错"><a href="#设置的容量超过已有容量时报错" class="headerlink" title="设置的容量超过已有容量时报错"></a>设置的容量超过已有容量时报错</h4><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建字符串切片，长度和容量都是 5</span></span><br><span class="line">source := []<span class="hljs-keyword">string</span>&#123;<span class="hljs-string">"Apple"</span>, <span class="hljs-string">"Orange"</span>, <span class="hljs-string">"Plum"</span>, <span class="hljs-string">"Banana"</span>, <span class="hljs-string">"Grape"</span>&#125;</span><br><span class="line"><span class="hljs-comment">// 基于上面的切片，创建一个新的切片</span></span><br><span class="line"><span class="hljs-comment">// 切片的长度为 3-2=1</span></span><br><span class="line"><span class="hljs-comment">// 切片的容量为 6-2=4</span></span><br><span class="line"><span class="hljs-comment">// 切片的起始位置是上一个切片索引为 2 的元素「Plum」开始，最大可用的容量为 3 个</span></span><br><span class="line"><span class="hljs-comment">// 所以企图设置容量为 4 时，会报错: runtime error: slice bounds out of range</span></span><br><span class="line">slice := source[<span class="hljs-number">2</span>:<span class="hljs-number">3</span>:<span class="hljs-number">6</span>]</span><br><span class="line">fmt.Println(slice)</span><br></pre></td></tr></table></figure></p>
+<h4 id="设置长度和容量一样的好处"><a href="#设置长度和容量一样的好处" class="headerlink" title="设置长度和容量一样的好处"></a>设置长度和容量一样的好处</h4>
     
     </div>
     
@@ -329,7 +348,7 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comments</h3>
+    <h3 class="title is-4">評論</h3>
     
 <script>
     var disqus_config = function () {
@@ -531,7 +550,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -543,11 +562,11 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
             },
             CONTENT_URL: '/content.json',
         };
