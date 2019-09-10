@@ -18,7 +18,7 @@
 </script>
 
     <meta charset="utf-8">
-<title>标签: LeetCode - 无尽的博客</title>
+<title>LeetCode9-PalindromeNumber「回文数」 - 无尽的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -38,17 +38,18 @@
 
 
 
-    <meta name="description" content="吃学习的苦，还是吃生活的苦？">
-<meta name="keywords" content="无尽的博客,无尽,Golang,Java,后端开发,程序员,技术博客,技术学习,Endlexx">
-<meta property="og:type" content="website">
-<meta property="og:title" content="无尽的博客">
-<meta property="og:url" content="endless2xx.github.io/tags/LeetCode/index.html">
+    <meta name="keywords" content="Golang,LeetCode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode9-PalindromeNumber「回文数」">
+<meta property="og:url" content="endless2xx.github.io/2019/09/08/LeetCode9-PalindromeNumber/index.html">
 <meta property="og:site_name" content="无尽的博客">
-<meta property="og:description" content="吃学习的苦，还是吃生活的苦？">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.unsplash.com/photo-1549208368-768234073504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+<meta property="og:image" content="https://raw.githubusercontent.com/endless2xx/images/master/20190908183048.png">
+<meta property="og:updated_time" content="2019-09-10T15:00:58.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无尽的博客">
-<meta name="twitter:description" content="吃学习的苦，还是吃生活的苦？">
+<meta name="twitter:title" content="LeetCode9-PalindromeNumber「回文数」">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1549208368-768234073504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
 
 
 
@@ -123,6 +124,32 @@
             </a>
             
             
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#问题描述">1&nbsp;&nbsp;<b>问题描述</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#分析">2&nbsp;&nbsp;<b>分析</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#代码">3&nbsp;&nbsp;<b>代码</b></a>
+                    
+                </div>
+            </div>
+            
             
             <a class="navbar-item" title="GitHub" href="https://github.com/endless2xx">
                 
@@ -135,20 +162,12 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5>#LeetCode</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2019/09/08/LeetCode9-PalindromeNumber/" itemprop="url">LeetCode9-PalindromeNumber「回文数」</a>
+            LeetCode9-PalindromeNumber「回文数」
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -172,180 +191,72 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p><img src="https://images.unsplash.com/photo-1549208368-768234073504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="开具一张图"></p>
-        <p class="article-more-link">
-            <a href="/2019/09/08/LeetCode9-PalindromeNumber/#more">阅读更多</a>
-        </p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><strong>「9. 回文数」</strong> <a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="noopener">查看原题</a>  <a href="https://leetcode-cn.com/problems/palindrome-number/" target="_blank" rel="noopener">中文</a></p>
+<p> 『难度』<strong>🟢「Easy」</strong></p>
+<p><img src="https://raw.githubusercontent.com/endless2xx/images/master/20190908183048.png" alt></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先，题目中的是判断一个整数是否为回文数，那么一个整数如果是回文数，它的特点是将数字反过来和原来的一改一样大小的，比如 121 反过来还是 121，所以只需要将数字反转后和原来的数字比较是否相等即可，注意题目中如果是负数则判断为不是会问</p>
+<blockquote>
+<p>如何反转一个数字？以 123 为例：</p>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><figure class="highlight go hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 回文数</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(isPalindrome(<span class="hljs-number">123211</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">bool</span></span> &#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span> &#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	result := <span class="hljs-number">0</span></span><br><span class="line">	temp := x</span><br><span class="line">	<span class="hljs-comment">// 将数字反转，123 经过反转后变成 321</span></span><br><span class="line">	<span class="hljs-keyword">for</span> x != <span class="hljs-number">0</span> &#123;</span><br><span class="line">		result = result*<span class="hljs-number">10</span> + x%<span class="hljs-number">10</span></span><br><span class="line">		x = x / <span class="hljs-number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> result == temp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Golang/">#Golang</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/LeetCode/">#LeetCode</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/算法/">#算法</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/09/03/Golang-Basic02-Slice/">Go语言基础-02-切片</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
 
 
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+<script>
+    var disqus_config = function () {
+        this.page.url = 'endless2xx.github.io/2019/09/08/LeetCode9-PalindromeNumber/';
+        this.page.identifier = '2019/09/08/LeetCode9-PalindromeNumber/';
         
-            <a href="/2019/09/02/LeetCode7-ReverseInteger/" itemprop="url">LeetCode7-ReverseInteger「整数反转」</a>
+        this.language = 'zh';
         
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-09-02T15:06:07.000Z" itemprop="datePublished">9月 2 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 分钟 读完 (约 351 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p><img src="https://images.pexels.com/photos/1416900/pexels-photo-1416900.jpeg?cs=srgb&dl=4k-wallpaper-altitude-boulder-1416900.jpg&fm=jpg" alt="开局一张图"></p>
-        <p class="article-more-link">
-            <a href="/2019/09/02/LeetCode7-ReverseInteger/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'endlexx' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2019/08/31/LeetCode2-AddTwoNumbers/" itemprop="url">LeetCode2-AddTwoNumbers「两数相加」</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-08-31T11:54:20.000Z" itemprop="datePublished">8月 31 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            4 分钟 读完 (约 596 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p><img src="https://images.pexels.com/photos/2821285/pexels-photo-2821285.jpeg?cs=srgb&dl=coast-island-mountain-2821285.jpg&fm=jpg" alt="开局一张图"></p>
-        <p class="article-more-link">
-            <a href="/2019/08/31/LeetCode2-AddTwoNumbers/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2019/08/29/LeetCode1-TwoSum/" itemprop="url">LeetCode1-TwoSum「两数之和」</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-08-29T14:27:43.000Z" itemprop="datePublished">8月 29 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            1 分钟 读完 (约 192 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p><img src="https://images.pexels.com/photos/1036154/pexels-photo-1036154.jpeg?cs=srgb&dl=bay-beach-blue-1036154.jpg&fm=jpg" alt="开局一张图"></p>
-        <p class="article-more-link">
-            <a href="/2019/08/29/LeetCode1-TwoSum/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2019/08/18/LeetCode848-ShiftingLetters/" itemprop="url">LeetCode848-字母移位</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-08-18T05:37:22.000Z" itemprop="datePublished">8月 18 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            1 分钟 读完 (约 178 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p><img src="https://images.pexels.com/photos/2635611/pexels-photo-2635611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="开局一张图"></p>
-        <p class="article-more-link">
-            <a href="/2019/08/18/LeetCode848-ShiftingLetters/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-    
     </div>
 </section>
     <footer class="footer">
